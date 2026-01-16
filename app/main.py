@@ -6,6 +6,10 @@ from .routers import auth, courses, recommendation
 from .routers import course_detail, lesson_detail
 from .routers import progress, lessons
 
+from sqlalchemy.orm import Session
+from .seed import run_seed
+from .models import Course
+
 
 app = FastAPI(title="Adaptive E-Learning API")
 app.security = [HTTPBearer()]
@@ -24,6 +28,21 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.on_event("startup")
+def startup_seed():
+    Base.metadata.create_all(bind=engine)
+
+    db = Session(bind=engine)
+    try:
+        # Only seed if no courses exist
+        if db.query(Course).count() == 0:
+            run_seed(db)
+            print("✅ Database seeded")
+        else:
+            print("ℹ️ Seed skipped (data exists)")
+    finally:
+        db.close()
 
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(courses.router, prefix="/courses", tags=["courses"])
