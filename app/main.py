@@ -14,9 +14,9 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
-        # Later, add your live frontend domains here, e.g.
-        # "https://adaptive-learning.co.uk",
-        # "https://www.adaptive-learning.co.uk",
+        "https://adaptive-elearning-frontend.vercel.app",
+        "https://adaptive-learning.co.uk",
+        "https://www.adaptive-learning.co.uk",
     ],
     allow_credentials=True,
     allow_methods=["*"],
