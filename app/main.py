@@ -17,6 +17,7 @@ app.add_middleware(
         "https://adaptive-elearning-frontend.vercel.app",
         "https://adaptive-learning.co.uk",
         "https://www.adaptive-learning.co.uk",
+        "https://adaptive-elearning-backend-production.up.railway.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
