@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.security import HTTPBearer
 from fastapi.middleware.cors import CORSMiddleware
 
-from .db import Base, engine
 from .routers import auth, courses, recommendation
 from .routers import course_detail, lesson_detail
 from .routers import progress, lessons
@@ -25,10 +24,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-@app.on_event("startup")
-def on_startup():
-    Base.metadata.create_all(bind=engine)
 
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(courses.router, prefix="/courses", tags=["courses"])
