@@ -2,9 +2,11 @@ from fastapi import FastAPI
 from fastapi.security import HTTPBearer
 from fastapi.middleware.cors import CORSMiddleware
 
+from .db import Base, engine
 from .routers import auth, courses, recommendation
 from .routers import course_detail, lesson_detail
 from .routers import progress, lessons
+
 
 app = FastAPI(title="Adaptive E-Learning API")
 app.security = [HTTPBearer()]
@@ -24,10 +26,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ✅ Removed DB auto-create on startup (this was breaking deploys):
-# @app.on_event("startup")
-# def on_startup():
-#     Base.metadata.create_all(bind=engine)
+@app.on_event("startup")
+def on_startup():
+    Base.metadata.create_all(bind=engine)
 
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(courses.router, prefix="/courses", tags=["courses"])
