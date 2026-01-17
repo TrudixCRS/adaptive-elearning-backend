@@ -5,7 +5,7 @@ import json
 
 from ..db import SessionLocal
 from .. import models
-from .auth import get_current_user  # must exist in your auth router
+from .auth import get_current_user
 
 router = APIRouter()
 
@@ -29,7 +29,7 @@ def _get_or_create_progress(db: Session, user_id: int, lesson_id: int):
 @router.post("/complete")
 def mark_completed(
     lesson_id: int,
-    score: float | None = None,   # ✅ add this
+    score: float | None = None,
     db: Session = Depends(db_dep),
     user: models.User = Depends(get_current_user),
 ):

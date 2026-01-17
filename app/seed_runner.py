@@ -1,5 +1,5 @@
 from app.db import Base, engine, SessionLocal
-from app.seed import run_seed  # adjust if your seed exposes a different function
+from app.seed import run_seed
 
 def main():
     Base.metadata.create_all(bind=engine)

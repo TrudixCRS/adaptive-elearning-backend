@@ -1315,7 +1315,6 @@ COURSES += [
 ]
 
 # Ensure exactly 20 courses
-# We currently have 7 handcrafted courses above + 13 added = 20
 assert len(COURSES) == 20, f"Expected 20 courses, got {len(COURSES)}"
 
 
