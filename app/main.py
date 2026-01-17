@@ -6,10 +6,9 @@ from .routers import auth, courses, recommendation
 from .routers import course_detail, lesson_detail
 from .routers import progress, lessons
 
-from sqlalchemy.orm import Session
+from .db import SessionLocal
 from .seed import run_seed
 from .models import Course
-
 
 app = FastAPI(title="Adaptive E-Learning API")
 app.security = [HTTPBearer()]
@@ -31,9 +30,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 def startup_seed():
-    Base.metadata.create_all(bind=engine)
-
-    db = Session(bind=engine)
+    db = SessionLocal()
     try:
         # Only seed if no courses exist
         if db.query(Course).count() == 0:
