@@ -8,7 +8,7 @@ from .db import SessionLocal
 from .seed import run_seed
 from .models import Course
 
-app = FastAPI(title="Adaptive E-Learning API")
+app = FastAPI(title="Adaptive E-Learning API", redirect_slashes=False)
 app.security = [HTTPBearer()]
 
 app.add_middleware(
