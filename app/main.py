@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.security import HTTPBearer
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import auth, courses, recommendation, course_detail, lesson_detail, progress, lessons, admin
+from .routers import auth, courses, recommendation, course_detail, lesson_detail, progress, lessons
 
 from .db import SessionLocal
 from .seed import run_seed
@@ -46,5 +46,3 @@ app.include_router(course_detail.router, prefix="/courses", tags=["courses"])
 app.include_router(lesson_detail.router, prefix="/lessons", tags=["lessons"])
 app.include_router(progress.router, prefix="/progress", tags=["progress"])
 app.include_router(lessons.router, prefix="/lessons", tags=["lessons"])
-app.include_router(auth.router)
-app.include_router(admin.router)

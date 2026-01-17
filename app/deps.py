@@ -2,7 +2,6 @@ from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from .db import get_db
-from .security import get_current_user  # if you already have this
 from . import models
 
 def require_admin(
