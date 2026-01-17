@@ -1375,6 +1375,17 @@ def seed_course(db, course_data: dict):
 
     db.commit()
 
+def run_seed(db):
+    """
+    Called by FastAPI startup.
+    Seeds (replaces) the 20 courses safely.
+    """
+    for course in COURSES:
+        delete_course_by_title(db, course["title"])
+        seed_course(db, course)
+
+    print(f"Seeded {len(COURSES)} premium courses ✅")
+
 
 def run():
     Base.metadata.create_all(bind=engine)
