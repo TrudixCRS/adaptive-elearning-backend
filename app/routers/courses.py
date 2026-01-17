@@ -12,7 +12,8 @@ def db_dep():
     finally:
         db.close()
 
-@router.get("/")
+@router.get("")
 def list_courses(db: Session = Depends(db_dep)):
     rows = db.query(models.Course).all()
     return [{"id": c.id, "title": c.title, "description": c.description} for c in rows]
+

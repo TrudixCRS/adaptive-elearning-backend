@@ -8,14 +8,12 @@ from .db import SessionLocal
 from .seed import run_seed
 from .models import Course
 
-app = FastAPI(title="Adaptive E-Learning API")
+app = FastAPI(title="Adaptive E-Learning API", redirect_slashes=False)
 app.security = [HTTPBearer()]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
         "https://adaptive-elearning-frontend.vercel.app",
         "https://adaptive-learning.co.uk",
         "https://www.adaptive-learning.co.uk",
