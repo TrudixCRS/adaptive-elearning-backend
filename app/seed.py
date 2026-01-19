@@ -4,16 +4,13 @@ from .db import SessionLocal, Base, engine
 from . import models
 
 
-# ----------------------------
-# Helpers: Markdown + Quiz JSON
-# ----------------------------
 def md(*lines: str) -> str:
     return "\n".join(lines).strip() + "\n"
 
 
 def quiz_json(questions: list[dict]) -> str:
     """
-    Your frontend Quiz UI expects:
+    The frontend Quiz UI expects:
     {"questions":[{"q":"...","options":[...],"answerIndex":0,"explain":"..."}]}
     """
     return json.dumps({"questions": questions}, ensure_ascii=False)
@@ -43,11 +40,6 @@ def course_template(title: str, description: str, modules: list[dict]):
     return {"title": title, "description": description, "modules": modules}
 
 
-# ----------------------------
-# 20 Premium Courses
-# Each course: 3 modules of text lessons + 1 final quiz lesson.
-# Total lessons per course: 7 (6 content + 1 quiz)
-# ----------------------------
 COURSES = [
     # 1) Intro to Python (FULL)
     course_template(
@@ -1060,8 +1052,6 @@ COURSES = [
     ),
 ]
 
-# Build remaining courses (8..20) with premium topic-specific content
-# (Still handcrafted & topic-specific, not generic filler.)
 
 def add_course(title, description, lesson_topics, quiz_questions):
     """

@@ -84,7 +84,7 @@ class Progress(Base):
     lesson_id = Column(Integer, ForeignKey("lessons.id"), nullable=False, index=True)
 
     status = Column(String, nullable=False, default="completed")  # completed | started
-    score = Column(Float, nullable=True)  # optional for later quizzes
+    score = Column(Float, nullable=True)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     __table_args__ = (
